@@ -1,0 +1,37 @@
+			TRAFFIC LIGHT CODE
+					KEERTHI VASAN S
+					49621911078
+
+import RPi.GPIO as GPIO
+import time
+import signal
+import sys
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+def allLightsOff(signal, frame):
+    GPIO.output(23, False)
+    GPIO.output(24, False)
+    GPIO.output(25, False)
+    GPIO.cleanup()
+    sys.exit(0)
+signal.signal(signal.SIGINT, allLightsOff)
+while True: 
+    # Red 
+    GPIO.output(23, True) 
+    time.sleep(5)  
+    # Red and amber 
+    GPIO.output(24, True) 
+    time.sleep(5)  
+    # Green 
+    GPIO.output(23, False) 
+    GPIO.output(24, False) 
+    GPIO.output(25, True) 
+    time.sleep(5)  
+    # Amber 
+    GPIO.output(25, False) 
+    GPIO.output(24, True) 
+    time.sleep(5)  
+    # Amber off (red comes on at top of loop) 
+    GPIO.output(24, False)
